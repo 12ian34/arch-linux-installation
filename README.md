@@ -67,16 +67,16 @@ lsblk
 cgdisk /dev/nvme0n1
 ```
 - first partition:
-  - `512M`
-  - `ef00`
-  - `efi`
+  - allocation: `512M`
+  - type: `ef00`
+  - name: `efi`
 - second partition:
-  - (to suggested max)
-  - `8300`
-  - `main`
+  - allocation: (to suggested max)
+  - type: `8300`
+  - name: `main`
 ```
-	mkfs.vfat -F32 /dev/nvme0n1p1
-	mkfs.ext4 /dev/nvme0n1p2
+mkfs.vfat -F32 /dev/nvme0n1p1
+mkfs.ext4 /dev/nvme0n1p2
 ```
 
 ##### encryption, luks + lvm
@@ -108,22 +108,19 @@ nano /etc/pacman.d/mirrorlist
 ```
 - change UK mirror to https
 - add
-	`Server = https://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch`
+  
+  `Server = https://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch`
 
 ```
-pacstrap /mnt base base-devel vim dialog wpa_supplicant git fish efibootmgr sudo iw i3 nano linux man-db man-pages texinfo intel-ucode linux-headers linux-lts linux-lts-headers
+pacstrap /mnt base base-devel cryptsetup dhcpcd dialog efibootmgr intel-ucode iw linux linux-headers linux-lts linux-lts-headers man-db man-pages nano sudo texinfo vim wpa_supplicant
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
 `nano /mnt/etc/fstab`
- - on non-boot, for ssd, change relatime to noatime
+- on non-boot, for ssd, change relatime to noatime
 
-##### chroot
+##### chroot, locale, time, host
 ```
 arch-chroot /mnt
-```
-
-##### locale, time, host
-```
 sed -i 's/^# *\(en-GB.UTF-8\)/\1/' /etc/locale.gen
 locale-gen
 echo LANG=en_GB.UTF-8 > /etc/locale.conf
@@ -151,16 +148,17 @@ users
 ```
 nano /etc/mkinitcpio.conf
 ```
-- modules:
-  add `i915 ext4 nvme intel_agp`
-- hooks:
-  `base systemd autodetect keyboard sd-vconsole block modconf sd-encrypt sd-lvm2 filesystems fsck`
+- `modules`:
+  - add `i915 ext4 nvme intel_agp`
+- `hooks`:
+  - change line to `base systemd autodetect keyboard sd-vconsole block modconf sd-encrypt sd-lvm2 filesystems fsck`
 
 ##### boot
 ```
 bootctl --path=/boot/ install
-nano -w /boot/loader/loader.conf
+nano /boot/loader/loader.conf
 ```
+enter: 
 ```
 default arch
 timeout 2
@@ -168,17 +166,19 @@ editor 0
 ```
 
 ```
-blkid -s UUID -o value /dev/mapper/volume-root
+# blkid -s UUID -o value /dev/mapper/volume-root
+blkid -s UUID -o value /dev/nvme0n1p2
 cryptsetup luksUUID /dev/nvme0n1p2
-nano -w /boot/loader/entries/arch.conf
+nano /boot/loader/entries/arch.conf
 ```
+enter:
 ```
 title ArchLinux 
 linux /vmlinuz-linux 
 initrd /initramfs-linux.img
-options luks.uuid=UUID luks.name=UUID=luks root=/dev/mapper/volume-root resume=/dev/mapper/volume-swap rw
-
+options luks.uuid=<UUID> luks.name=<UUID>=luks root=/dev/mapper/volume-root resume=/dev/mapper/volume-swap rw
 #options cryptdevice=UUID=<>:lvm:allow-discards resume=/dev/mapper/volume-swap root=/dev/mapper/volume-root rw quiet
+```
 
 ###### if boot fucks up
 ```
@@ -193,7 +193,7 @@ arch-chroot /mnt
 ```
 nano /etc/modprobe.d/i915.conf
 ```
-
+enter:
 ```
 options i915 enable_rc6=1 enable_fbc=1 semaphores=1 modeset=1 enable_guc_loading=1 enable_guc_submission=1 enable_huc=1 disable_power_well=0 enable_psr=1
 ```
@@ -202,11 +202,12 @@ options i915 enable_rc6=1 enable_fbc=1 semaphores=1 modeset=1 enable_guc_loading
 mkdir /etc/X11/xorg.conf.d
 nano /etc/X11/xorg.conf.d/20-intel.conf
 ```
+enter:
 ```
 Section "Device"
   Identifier  "Intel Graphics"
   Driver      "intel"
-	Option      "AccelMethod"
+  Option      "AccelMethod"
 EndSection
 ```
 
@@ -219,11 +220,12 @@ wifi-menu -o wlp58s0
 ip link set wlp58s0 down
 netctl start <wifi-ssid-name>
 echo 'ForceConnect=yes' >> /etc/netctl/<wifi-ssid-name>
-pacman -S intel-ucode
-nano /boot/loader/entries/arch.conf
 ```
 ```
-initrd		/intel-ucode.img
+#pacman -S intel-ucode
+#nano /boot/loader/entries/arch.conf
+#enter:
+  #initrd	/intel-ucode.img
 ```
 ```
 mkinitcpio -p linux
@@ -240,14 +242,14 @@ nano /etc/pacman.conf
 - uncomment "Color"
 
 ```
-sudo pacman -Syu xorg-server xorg-xinit chromium linux-headers xorg xorg-apps dkms ttf-liberation ttf-dejavu xf86-video-intel vulkan-intel libva-intel-driver mesa-libgl libva network-manager-applet networkmanager xf86-input-libinput mesa ntfs-3g fuse python python-virtualenv i3 numlockx noto-fonts ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-droid ttf-inconsolata ttf-roboto terminus-font ttf-font-awesome alsa-utils alsa-plugins alsa-lib pavucontrol rxvt-unicode rofi dmidecode systemd-swap neofetch noto-fonts-emoji otf-ipafont ttf-hanazono adobe-source* redshift xorg-xinit mesa xterm xorg-twm xorg-xclock ttf-dejavu ttf-liberation noto-fonts xf86-input-libinput xorg-server xorg-xinit xorg-apps mesa xterm xf86-video-intel lib32-intel-dri lib32-mesa lib32-libgl tmux fwupd utils-linux dmidecode
+sudo pacman -Syu binutils coreutils fish grep gzip htop lib32-intel-dri lib32-libgl lib32-mesa libva libva-intel-driver light mesa mesa-libgl netctl network-manager-applet networkmanager openssh pacman pacman-contrib pciutils rclone sed sshfs systemd-swaptar tmux tree ufw unzip usbutils util-linux utils-linux vulkan-intel wget xf86-input-libinput xf86-video-intel xf86-video-vesa zip
 ```
 
 ##### internet
 ```
 systemctl start NetworkManager
 systemctl enable NetworkManager
-nmcli dev wifi connect <wifi-ssid-name> <wi-fi-password> pwd
+nmcli dev wifi connect <wifi-ssid-name> <wi-fi-password>
 ```
 
 ##### yay
@@ -255,6 +257,13 @@ nmcli dev wifi connect <wifi-ssid-name> <wi-fi-password> pwd
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+```
+
+##### install a bunch of other packages
+```
+sudo pacman -Syu acpi adobe-source-han-sans-cn-fonts adobe-source-han-sans-hk-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts alsa-lib alsa-plugins alsa-utils android-tools arandr arc-gtk-theme asciiquarium autoconf automake bash bison bzip2 catimg chafa chromium cmatrix code device-mapper diffutils dkms dmidecode dpkg e2fsprogs fakeroot feh file filesystem findutils flashplugin flex fuse fuse2 fwupd fzf gawk gcc gcc-libs gettext git glibc gnome-keyring gparted gpaste groff gvfs hdparm i3 i3-wm i3blocks i3lock i3status imagemagick inetutils iotop iproute2 iputils jfsutils jre10-openjdk jupyter less libmtp libreoffice-fresh libtool licenses linux-firmware logrotate lsd lvm2 lxappearance m4 make mdadm mpv neko neofetch net-tools nextcloud-client nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra npm ntfs-3g numlockx okular opera otf-ipafont pamixer patch pavucontrol pcmanfm pepper-flash perl pkgconf playerctl postgresql powertop procps-ng psmisc pulseaudio pulseaudio-alsa pulseaudio-bluetooth python python-virtualenv qalculate-gtk qgis redshift reiserfsprogs rofi rxvt-unicode s-nail scrot seahorse shadow sl slimevolley sublime-text sysfsutils systemd systemd-sysvcompat telegram-desktop terminus-font transmission-gtk ttf-dejavu ttf-droid ttf-font-awesome ttf-hanazono ttf-ibm-plex ttf-inconsolata ttf-joypixels ttf-liberation ttf-roboto ttf-roboto-mono ttf-ubuntu-font-family vlc w3m which whois xclip xfce4-terminal xfsprogs xorg xorg-apps xorg-bdftopcf xorg-docs xorg-font-util xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-server-common xorg-server-devel xorg-server-xephyr xorg-server-xnest xorg-server-xvfb xorg-server-xwayland xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-twm xorg-x11perf xorg-xauth xorg-xbacklight xorg-xclock xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwd xorg-xwininfo xorg-xwud xsel xterm yay zathura
+
+yay -Syu chromium-widevine debtap fisher google-cloud-sdk gotop imagewriter libinput-gestures pipes.sh postman qt4 slack-desktop spotify ttf-roboto-slab ttf-symbola ttf-twemoji vcvrack-bin xorg-server-xdmx
 ```
 
 ##### final steps
@@ -265,6 +274,7 @@ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 nano .xinitrc
 ```
 - remove shit at bottom
+- enter: 
 ```
 setxkbmap -layout gb &
 numlockx &
