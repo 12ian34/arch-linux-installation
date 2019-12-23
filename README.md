@@ -1,7 +1,4 @@
 # notes
-- some more help is available:
-  - https://linuxconfig.org/install-arch-linux-on-thinkpad-x1-carbon-gen-7-with-encrypted-filesystem-and-uefi
-  - https://github.com/ejmg/an-idiots-guide-to-installing-arch-on-a-lenovo-carbon-x1-gen-6
 - installs arch with:
   - `LVM` on `LUKS` encryption
   - UEFI
@@ -295,3 +292,25 @@ fi
 ```
 reboot
 ```
+
+# sources:
+- https://wiki.archlinux.org/index.php/Installation_guide
+- https://linuxconfig.org/install-arch-linux-on-thinkpad-x1-carbon-gen-7-with-encrypted-filesystem-and-uefi
+- https://github.com/ejmg/an-idiots-guide-to-installing-arch-on-a-lenovo-carbon-x1-gen-6
+- https://gist.github.com/OdinsPlasmaRifle/e16700b83624ff44316f87d9cdbb5c94
+- https://www.thelinuxsect.com/?p=36
+- https://turlucode.com/arch-linux-install-guide-efi-lvm-luks/#1499978715503-ad8f936f-d6c9
+- https://turlucode.com/arch-linux-install-guide-step-1-basic-installation/
+- https://turlucode.com/arch-linux-install-guide-step-2-desktop-environment-installation/
+- https://gist.github.com/heppu/6e58b7a174803bc4c43da99642b6094b
+- https://0x00sec.org/t/arch-linux-with-lvm-on-luks-dm-crypt-disk-encryption-installation-guide-legacy-bios-system/1479
+- https://gist.github.com/HardenedArray/31915e3d73a4ae45adc0efa9ba458b07
+- https://gist.github.com/Thrilleratplay/93d57dbab36dc4304cd8
+- https://gist.github.com/mattiaslundberg/8620837
+- https://jairam.dev/technology/2018/06/21/install-arch-linux-with-encryption.html
+- https://www.howtoforge.com/tutorial/how-to-install-arch-linux-with-full-disk-encryption/
+- https://gist.github.com/njam/85ab2771b40ccc7ddcef878eb82a0fe9
+- https://daenney.github.io/2017/11/11/arch-linux-xps-13-9360.html
+- https://gist.github.com/ymatsiuk/1181b514a9c1979088bd2423a24928cf
+- https://medium.com/@mudrii/arch-linux-installation-on-hw-with-i3-windows-manager-part-1-5ef9751a0be
+- https://medium.com/@mudrii/arch-linux-installation-on-hw-with-i3-windows-manager-part-2-x-window-system-and-i3-installation-86735e55a0a0
