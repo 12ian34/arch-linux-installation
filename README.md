@@ -166,9 +166,11 @@ editor 0
 ```
 
 ```
-# blkid -s UUID -o value /dev/mapper/volume-root
+#blkid -s UUID -o value /dev/mapper/volume-root
 blkid -s UUID -o value /dev/nvme0n1p2
 cryptsetup luksUUID /dev/nvme0n1p2
+```
+```
 nano /boot/loader/entries/arch.conf
 ```
 enter:
