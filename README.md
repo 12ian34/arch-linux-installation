@@ -1,14 +1,14 @@
 # notes
-- installs arch with:
-  - `LVM` on `LUKS` encryption
-  - UEFI
+- this process installs arch with:
+  - `UEFI` boot mode
+  - `LVM` on `LUKS` encryption via `dm-crypt`
   - `systemd-boot`
   - intel graphics and `ucode` updates
-  - a selection of my personal key packages
-- guide developed over 2 years as an Arch user
+  - a selection of packages
+- guide developed over 2 years as an Arch user, beware
 - if I'm doing anything dodgy, questionable or inefficient, please let me know
 - always follow the [real installation guide](https://wiki.archlinux.org/index.php/Installation_guide) as a priority since it's constantly updated
-- this is confirmed to be working great on:
+- something very similar to this process has been tested and considerably used on:
   - a Thinkpad X1 Carbon 6th Gen with an NVMe SSD
   - a Dell XPS 9360 with an NVMe SSD
 
@@ -179,7 +179,7 @@ options luks.uuid=<UUID> luks.name=<UUID>=luks root=/dev/mapper/volume-root resu
 #options cryptdevice=UUID=<>:lvm:allow-discards resume=/dev/mapper/volume-swap root=/dev/mapper/volume-root rw quiet
 ```
 
-###### if boot fucks up
+##### if boot fucks up
 ```
 cryptsetup luksOpen /dev/nvme0n1p2 luks
 mount /dev/mapper/volume-root /mnt
