@@ -282,10 +282,16 @@ setxkbmap -layout gb &
 numlockx &
 xset r rate 200 30 &
 exec i3
-
+```
+```
 sudo nano /etc/profile
-	add
-		if [[ "$(tty)" == '/dev/tty1' ]]; then
-    		exec startx
-		fi
+```
+enter:
+```
+if [[ "$(tty)" == '/dev/tty1' ]]; then
+	exec startx
+fi
+```
+```
+reboot
 ```
