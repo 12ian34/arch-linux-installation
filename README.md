@@ -109,7 +109,7 @@ nano /etc/pacman.d/mirrorlist
   `Server = https://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch`
 
 ```
-pacstrap /mnt base base-devel cryptsetup dhcpcd dialog efibootmgr intel-ucode iw linux linux-headers linux-lts linux-lts-headers lvm2 man-db man-pages nano sudo texinfo vim wpa_supplicant xf86-video-intel
+pacstrap /mnt base base-devel cryptsetup dhcpcd dialog efibootmgr intel-ucode iw linux linux-headers linux-lts linux-lts-headers lvm2 man-db man-pages nano sudo texinfo vim wpa_supplicant wifi-menu xf86-video-intel
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
 `nano /mnt/etc/fstab`
