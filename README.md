@@ -263,7 +263,7 @@ makepkg -si
 ```
 sudo pacman -Syu acpi adobe-source-han-sans-cn-fonts adobe-source-han-sans-hk-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts alsa-lib alsa-plugins alsa-utils android-tools arandr arc-gtk-theme asciiquarium autoconf automake bash bison bzip2 catimg chafa chromium cmatrix code device-mapper diffutils dkms dmidecode dpkg e2fsprogs fakeroot feh file filesystem findutils flashplugin flex fuse fuse2 fwupd fzf gawk gcc gcc-libs gettext git glibc gnome-keyring gparted gpaste groff gvfs hdparm i3 i3-wm i3blocks i3lock i3status imagemagick inetutils iotop iproute2 iputils jfsutils jre10-openjdk jupyter less libmtp libreoffice-fresh libtool licenses logrotate lsd lvm2 lxappearance m4 make mdadm mpv neko neofetch net-tools nextcloud-client nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra npm ntfs-3g numlockx okular opera otf-ipafont pamixer patch pavucontrol pcmanfm pepper-flash perl pkgconf playerctl postgresql powertop procps-ng psmisc pulseaudio pulseaudio-alsa pulseaudio-bluetooth python python-virtualenv qalculate-gtk qgis redshift reiserfsprogs rofi rxvt-unicode s-nail scrot seahorse shadow sl slimevolley sysfsutils systemd systemd-sysvcompat telegram-desktop terminus-font transmission-gtk ttf-dejavu ttf-droid ttf-font-awesome ttf-hanazono ttf-ibm-plex ttf-inconsolata ttf-joypixels ttf-liberation ttf-roboto ttf-roboto-mono ttf-ubuntu-font-family vlc w3m which whois xclip xfce4-terminal xfsprogs xorg xorg-apps xorg-bdftopcf xorg-docs xorg-font-util xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-server-common xorg-server-devel xorg-server-xephyr xorg-server-xnest xorg-server-xvfb xorg-server-xwayland xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-twm xorg-x11perf xorg-xauth xorg-xbacklight xorg-xclock xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwd xorg-xwininfo xorg-xwud xsel xterm zathura
 
-yay -Syu chromium-widevine debtap fisher google-cloud-sdk gotop imagewriter libinput-gestures pipes.sh postman qt4 slack-desktop spotify ttf-roboto-slab ttf-symbola ttf-twemoji vcvrack-bin xorg-server-xdmx
+yay -Syu chromium-widevine debtap fisher google-cloud-sdk gotop imagewriter libinput-gestures pipes.sh postman slack-desktop spotify ttf-roboto-slab ttf-symbola ttf-twemoji vcvrack-bin xorg-server-xdmx
 ```
 
 note: add sublime-text
@@ -295,6 +295,29 @@ fi
 ```
 reboot
 ```
+
+
+
+
+add mirrorlist
+
+## United Kingdom
+#Server = http://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch
+#Server = https://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch
+#Server = http://mirror.bytemark.co.uk/archlinux/$repo/os/$arch
+#Server = https://mirror.bytemark.co.uk/archlinux/$repo/os/$arch
+#Server = http://mirrors.manchester.m247.com/arch-linux/$repo/os/$arch
+#Server = http://www.mirrorservice.org/sites/ftp.archlinux.org/$repo/os/$arch
+#Server = https://www.mirrorservice.org/sites/ftp.archlinux.org/$repo/os/$arch
+#Server = http://mirror.netweaver.uk/archlinux/$repo/os/$arch
+#Server = https://mirror.netweaver.uk/archlinux/$repo/os/$arch
+#Server = http://lon.mirror.rackspace.com/archlinux/$repo/os/$arch
+#Server = https://lon.mirror.rackspace.com/archlinux/$repo/os/$arch
+#Server = http://arch.serverspace.co.uk/arch/$repo/os/$arch
+#Server = http://archlinux.mirrors.uk2.net/$repo/os/$arch
+#Server = http://mirrors.ukfast.co.uk/sites/archlinux.org/$repo/os/$arch
+#Server = https://mirrors.ukfast.co.uk/sites/archlinux.org/$repo/os/$arch
+
 
 # sources:
 - https://wiki.archlinux.org/index.php/Installation_guide
