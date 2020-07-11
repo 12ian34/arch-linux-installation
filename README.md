@@ -79,7 +79,7 @@ mkfs.ext4 /dev/nvme0n1p2
 ##### encryption, luks + lvm
 ```
 cryptsetup -v -s 512 luksFormat /dev/nvme0n1p2
-crypsetup luksOpen /dev/nvme0n1p2 luks
+cryptsetup luksOpen /dev/nvme0n1p2 luks
 pvcreate /dev/mapper/luks
 vgcreate volume /dev/mapper/luks
 lvcreate -L 8G volume -n swap
