@@ -11,7 +11,7 @@
 - something very similar to this process has been tested and considerably used on:
   - a Thinkpad X1 Carbon 6th Gen with an NVMe SSD
   - a Dell XPS 9360 with an NVMe SSD
-  - a custom built PC with:
+  - a custom built PC (where I used amdgpu video driver instead) with:
       - AMD Ryzen 5 3600 CPU
       - RX 580 GPU
       - 2 x 8 GB Corsair Vengeance RGB Pro memory
