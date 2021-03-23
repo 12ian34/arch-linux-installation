@@ -11,6 +11,13 @@
 - something very similar to this process has been tested and considerably used on:
   - a Thinkpad X1 Carbon 6th Gen with an NVMe SSD
   - a Dell XPS 9360 with an NVMe SSD
+  - a custom built PC with:
+      - AMD Ryzen 5 3600 CPU
+      - RX 580 GPU
+      - 2 x 8 GB Corsair Vengeance RGB Pro memory
+      - MSI B450M Mortar Max motherboard
+      - Seasonic Focus Plus Gold 550W PSU
+      - Dual booting Windows 10 on a seperate NVME SSD
 
 # installation process
 
