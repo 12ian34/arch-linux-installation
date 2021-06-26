@@ -31,7 +31,7 @@ https://www.archlinux.org/download/
 
 ##### write to USB
 ```
-dd bs=4M if=/home/ian/downloads/chromium/archlinux-2019.12.01-x86_64.iso of=/dev/sdx status=progress oflag=sync
+sudo dd bs=4M if=/home/ian/downloads/torrent/archlinux-2021.06.01-x86_64.iso of=/dev/sde status=progress oflag=sync
 ```
 
 ##### wipe drive
@@ -43,6 +43,10 @@ dd if=/dev/zero of=/dev/nvme0n1 bs=16M status=progress
 ```
 badblocks -c 10240 -s -w -t 0 -v /dev/nvme0n1
 ```
+
+##### boot arch iso
+
+- reboot into arch iso
 
 ##### initial setup
 ```
