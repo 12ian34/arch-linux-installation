@@ -449,8 +449,8 @@ set -Ux LIBVA_DRIVER_NAME radeonsi
 3. go to `Preferences: Key Bindings`
 4. Add the following to the user preferences tab (to the right of the new window):
     ```
-    	{ "keys": ["ctrl+tab"], "command": "next_view" },
-	{ "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+    { "keys": ["ctrl+tab"], "command": "next_view" },
+    { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
     ```
 
 # sources:
