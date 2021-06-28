@@ -3,7 +3,7 @@
   - `UEFI` boot mode
   - `LVM` on `LUKS` encryption via `dm-crypt`
   - `systemd-boot`
-  - intel graphics and `ucode` updates
+  - intel/amd graphics with `ucode` updates
   - a selection of packages
 - guide developed over 2 years as an Arch user, beware
 - if I'm doing anything dodgy, questionable or inefficient, please let me know
@@ -169,12 +169,11 @@ nano /boot/loader/loader.conf
 enter: 
 ```
 default arch
-timeout 2
+timeout 0
 editor 0
 ```
 
 ```
-#blkid -s UUID -o value /dev/mapper/volume-root
 blkid -s UUID -o value /dev/nvme0n1p2
 cryptsetup luksUUID /dev/nvme0n1p2
 ```
@@ -187,7 +186,6 @@ title ArchLinux
 linux /vmlinuz-linux 
 initrd /initramfs-linux.img
 options luks.uuid=<UUID> luks.name=<UUID>=luks root=/dev/mapper/volume-root resume=/dev/mapper/volume-swap rw
-#options cryptdevice=UUID=<>:lvm:allow-discards resume=/dev/mapper/volume-swap root=/dev/mapper/volume-root rw quiet
 ```
 
 ##### if boot fucks up
@@ -199,7 +197,7 @@ mount /dev/nvme0n1p1 /mnt/boot
 arch-chroot /mnt
 ```
 
-##### intel graphics
+##### for intel graphics
 ```
 nano /etc/modprobe.d/i915.conf
 ```
@@ -253,7 +251,7 @@ nano /etc/pacman.conf
 - uncomment "Color"
 
 ```
-sudo pacman -Syu binutils coreutils fish grep gzip htop lib32-intel-dri lib32-libgl lib32-mesa libva libva-intel-driver light mesa mesa-libgl netctl network-manager-applet networkmanager openssh pacman pacman-contrib pciutils rclone sed sshfs systemd-swaptar tmux tree ufw unzip usbutils util-linux utils-linux wget xf86-input-libinput zip
+sudo pacman -Syu acpi adobe-source-han-sans-cn-fonts adobe-source-han-sans-hk-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts alsa-lib alsa-plugins alsa-utils amd-ucode android-tools arandr asciiquarium autoconf automake bash binutils cmatrix code coreutils device-mapper diffutils dmidecode e2fsprogs fakeroot feh file filesystem findutils firefox fish fuse fuse2 fwupd fzf gawk gcc gcc-libs github-cli gnome-keyring gparted grep gvfs gzip htop i3 i3-wm i3status-rust imagemagick inetutils iotop iproute2 iputils less lib32-libva-mesa-driver lib32-mesa-vdpau lib32-vulkan-radeon libreoffice-fresh libtool libva-mesa-driver licenses lm_sensors logrotate lsd lvm2 lxappearance make mesa mesa-vdpau mpv neofetch net-tools nitrogen ntfs-3g numlockx openssh opera opera-ffmpeg-codecs otf-ipafont pacman pacman-contrib pciutils pcmanfm pulseaudio pulseaudio-alsa python python-virtualenv qalculate-gtk rclone redshift reiserfsprogs rofi scrot seahorse sed sshfs syncthing systemd systemd-swap systemd-sysvcompat telegram-desktop terminus-font thunderbird tmux transmission-gtk tree ttf-dejavu ttf-droid ttf-font-awesome ttf-hanazono ttf-ibm-plex ttf-inconsolata ttf-joypixels ttf-liberation ttf-roboto ttf-roboto-mono ttf-ubuntu-font-family ufw unzip usbutils util-linux vdpauinfo vivaldi vlc vulkan-radeon wget which whois xdg-user-dirs xf86-video-amdgpu xfce4-terminal xorg xorg-apps xorg-xset zip
 ```
 
 ##### internet
@@ -272,12 +270,18 @@ makepkg -si
 
 ##### install a bunch of other packages
 ```
-sudo pacman -Syu acpi adobe-source-han-sans-cn-fonts adobe-source-han-sans-hk-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts alsa-lib alsa-plugins alsa-utils android-tools arandr arc-gtk-theme asciiquarium autoconf automake bash bison bzip2 catimg chafa chromium cmatrix code device-mapper diffutils dkms dmidecode dpkg e2fsprogs fakeroot feh file filesystem findutils flashplugin flex fuse fuse2 fwupd fzf gawk gcc gcc-libs gettext git glibc gnome-keyring gparted gpaste groff gvfs hdparm i3 i3-wm i3blocks i3lock i3status imagemagick inetutils iotop iproute2 iputils jfsutils jre10-openjdk jupyter less libmtp libreoffice-fresh libtool licenses logrotate lsd lvm2 lxappearance m4 make mdadm mpv neko neofetch net-tools nextcloud-client nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra npm ntfs-3g numlockx okular opera otf-ipafont pamixer patch pavucontrol pcmanfm pepper-flash perl pkgconf playerctl postgresql powertop procps-ng psmisc pulseaudio pulseaudio-alsa pulseaudio-bluetooth python python-virtualenv qalculate-gtk qgis redshift reiserfsprogs rofi rxvt-unicode s-nail scrot seahorse shadow sl slimevolley sysfsutils systemd systemd-sysvcompat telegram-desktop terminus-font transmission-gtk ttf-dejavu ttf-droid ttf-font-awesome ttf-hanazono ttf-ibm-plex ttf-inconsolata ttf-joypixels ttf-liberation ttf-roboto ttf-roboto-mono ttf-ubuntu-font-family vlc w3m which whois xclip xfce4-terminal xfsprogs xorg xorg-apps xorg-bdftopcf xorg-docs xorg-font-util xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-server-common xorg-server-devel xorg-server-xephyr xorg-server-xnest xorg-server-xvfb xorg-server-xwayland xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-twm xorg-x11perf xorg-xauth xorg-xbacklight xorg-xclock xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwd xorg-xwininfo xorg-xwud xsel xterm zathura
-
-yay -Syu chromium-widevine debtap fisher google-cloud-sdk gotop imagewriter libinput-gestures pipes.sh postman slack-desktop spotify ttf-roboto-slab ttf-symbola ttf-twemoji vcvrack-bin xorg-server-xdmx
+yay -Syu aur/adwaita-dark aur/archdroid-icon-theme aur/chromium-widevine aur/awesome-terminal-fonts-patched aur/birdtray aur/dislocker aur/exodus aur/google-cloud-sdk aur/joplin-desktop aur/msi-rgb aur/nerd-fonts-roboto-mono aur/protonmail-bridge aur/slack aur/spotify aur/steam-fonts aur/ttf-ms-fonts aur/vivaldi-widevine aur/whatsapp-nativefier aur/ttf-roboto-slab aur/ttf-twemoji aur/ttf-symbola
 ```
 
-note: add sublime-text
+##### sublime text
+
+```
+curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
+
+echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
+
+sudo pacman -Syu sublime-text
+```
 
 ##### final steps
 ```
@@ -306,29 +310,6 @@ fi
 ```
 reboot
 ```
-
-
-
-
-add mirrorlist
-
-## United Kingdom
-#Server = http://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch
-#Server = https://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch
-#Server = http://mirror.bytemark.co.uk/archlinux/$repo/os/$arch
-#Server = https://mirror.bytemark.co.uk/archlinux/$repo/os/$arch
-#Server = http://mirrors.manchester.m247.com/arch-linux/$repo/os/$arch
-#Server = http://www.mirrorservice.org/sites/ftp.archlinux.org/$repo/os/$arch
-#Server = https://www.mirrorservice.org/sites/ftp.archlinux.org/$repo/os/$arch
-#Server = http://mirror.netweaver.uk/archlinux/$repo/os/$arch
-#Server = https://mirror.netweaver.uk/archlinux/$repo/os/$arch
-#Server = http://lon.mirror.rackspace.com/archlinux/$repo/os/$arch
-#Server = https://lon.mirror.rackspace.com/archlinux/$repo/os/$arch
-#Server = http://arch.serverspace.co.uk/arch/$repo/os/$arch
-#Server = http://archlinux.mirrors.uk2.net/$repo/os/$arch
-#Server = http://mirrors.ukfast.co.uk/sites/archlinux.org/$repo/os/$arch
-#Server = https://mirrors.ukfast.co.uk/sites/archlinux.org/$repo/os/$arch
-
 
 # sources:
 - https://wiki.archlinux.org/index.php/Installation_guide
