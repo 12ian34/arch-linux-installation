@@ -314,7 +314,7 @@ makepkg -si
 
 ##### install AUR packages
 ```
-yay -Syu aur/adwaita-dark aur/archdroid-icon-theme aur/chromium-widevine aur/awesome-terminal-fonts-patched aur/birdtray aur/dislocker aur/exodus aur/google-cloud-sdk aur/joplin-desktop aur/msi-rgb aur/nerd-fonts-roboto-mono aur/protonmail-bridge aur/slack aur/spotify aur/steam-fonts aur/ttf-ms-fonts aur/vivaldi-widevine aur/whatsapp-nativefier aur/ttf-roboto-slab aur/ttf-twemoji aur/ttf-symbola
+yay -Syu aur/adwaita-dark aur/archdroid-icon-theme aur/chromium-widevine aur/awesome-terminal-fonts-patched aur/birdtray aur/dislocker aur/exodus aur/google-cloud-sdk aur/joplin-desktop aur/msi-rgb aur/nerd-fonts-roboto-mono aur/protonmail-bridge aur/slack-desktop aur/spotify aur/steam-fonts aur/ttf-ms-fonts aur/vivaldi-widevine aur/whatsapp-nativefier aur/ttf-roboto-slab aur/ttf-twemoji aur/ttf-symbola
 ```
 
 ##### add sublime text repo and install
@@ -474,6 +474,16 @@ mkdir ~/dev
 mkdir ~/pics
 mkdir ~/sync
 ```
+
+#### VS Code extensions
+- Python
+- Bracket Pair Colorizer 2
+- HTML snippets
+- GitLens
+- Prettier - Code formatter
+- Material Icon Theme
+- YAML
+- Markdown Preview Enhanced
 
 #### lights off
 1. run `lxappearance`
