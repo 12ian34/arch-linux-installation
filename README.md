@@ -435,6 +435,13 @@ change the following preferences:
 | gfx.x11-egl.force-enabled | true |
 | gfx.x11-egl.force-disabled | false |
 
+using fish, set universal permanent environment variables:
+```
+set -Ux MOZ_LOG PlatformDecoderModule:5
+set -Ux MOZ_X11_EGL 1
+set -Ux LIBVA_DRIVER_NAME radeonsi
+```
+
 # sources:
 - https://wiki.archlinux.org/index.php/Installation_guide
 - https://linuxconfig.org/install-arch-linux-on-thinkpad-x1-carbon-gen-7-with-encrypted-filesystem-and-uefi
