@@ -31,7 +31,7 @@ cp /etc/X11/xorg.conf.d/20-amdgpu.conf ~/dotfiles/home/
 cp /etc/X11/xorg.conf.d/10-monitor.conf ~/dotfiles/home/
 
 mkdir -p ~/dotfiles/home/joplin-desktop
-cp joplin-desktop/settings.json ~/dotfiles/home/joplin-desktop/
+cp ~/.config/joplin-desktop/settings.json ~/dotfiles/home/joplin-desktop/
 
 cp ~/.local/share/fish/fish_history ~/dotfiles/home/
 cp ~/.xinitrc ~/dotfiles/home/dotxinitrc
@@ -356,6 +356,63 @@ fi
 ```
 reboot
 ```
+
+#### copy back other config
+
+```
+cp ~/dotfiles/home/10-amdgpu.conf /usr/share/X11/xorg.conf.d/
+cp ~/dotfiles/home/10-monitor.conf /etc/X11/xorg.conf.d/
+mkdir -p ~/.config/joplin-desktop/
+cp ~/dotfiles/home/joplin-desktop/settings.json ~/.config/joplin-desktop/
+
+cp ~/dotfiles/home/fish_history ~/.local/share/fish/
+cp ~/dotfiles/home/dotgtk-bookmarks ~/.gtk-bookmarks
+cp ~/dotfiles/home/dotXresources ~/.Xresources
+cp -r ~/dotfiles/home/dotscreenlayout ~/.screenlayout
+cp -r ~/dotfiles/home/user-dirs.dirs ~/.config/
+
+cat ~/dotfiles/home/hosts
+# then append any new entries from this to /etc/hosts
+
+cp ~/dotfiles/home/asound.conf /etc/
+cp ~/dotfiles/home/vconsole.conf /etc/
+cp ~/dotfiles/home/pacman.conf /etc/
+
+cp -r ~/dotfiles/home/i3/ ~/.config/
+cp -r ~/dotfiles/home/i3status-rust/ ~/.config/
+cp -r ~/dotfiles/home/xfce4/ ~/.config/
+cp -r ~/dotfiles/home/fish/ ~/.config/
+cp -r ~/dotfiles/home/fisher/ ~/.config/
+cp -r ~/dotfiles/home/nano/ ~/.config/
+cp -r ~/dotfiles/home/htop/ ~/.config/
+cp -r ~/dotfiles/home/picom/ ~/.config/
+cp -r ~/dotfiles/home/pcmanfm/ ~/.config/
+cp ~/dotfiles/home/redshift.conf ~/.config/
+cp -r ~/dotfiles/home/ckb-next/ ~/.config/
+cp -r ~/dotfiles/home/rofi/ ~/.config/
+```
+
+#### enable auto login
+create directory:
+```
+sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
+```
+create conf:
+```
+sudo nano /etc/systemd/system/getty@tty1.service.d/override.conf
+```
+paste into `override.conf`:
+```
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin ian --noclear %I $TERM
+```
+enable and restart service
+```
+sudo systemctl enable getty@tty1
+sudo systemctl restart getty@tty1
+```
+
 #### firefox flags (settings and hardware acceleration)
 go to `about:config`
 
