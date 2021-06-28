@@ -38,6 +38,8 @@ cp ~/.xinitrc ~/dotfiles/home/dotxinitrc
 cp ~/.gtk-bookmarks ~/dotfiles/home/dotgtk-bookmarks
 cp ~/.Xresources ~/dotfiles/home/dotXresources
 cp -r ~/.screenlayout/ ~/dotfiles/home/dotscreenlayout
+# navigate to vscode folder location
+cp -r .vscode ~/dotfiles/home/dotvscode
 
 sudo cp /etc/hosts ~/dotfiles/home/
 sudo cp /boot/loader/entries/arch.conf ~/dotfiles/home/
@@ -370,6 +372,8 @@ cp ~/dotfiles/home/dotgtk-bookmarks ~/.gtk-bookmarks
 cp ~/dotfiles/home/dotXresources ~/.Xresources
 cp -r ~/dotfiles/home/dotscreenlayout ~/.screenlayout
 cp -r ~/dotfiles/home/user-dirs.dirs ~/.config/
+# navigate to desired vscode settings location
+cp -r ~/dotfiles/home/dotvscode .vscode
 
 cat ~/dotfiles/home/hosts
 # then append any new entries from this to /etc/hosts
