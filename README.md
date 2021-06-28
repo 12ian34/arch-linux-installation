@@ -442,9 +442,9 @@ set -Ux MOZ_X11_EGL 1
 set -Ux LIBVA_DRIVER_NAME radeonsi
 ```
 
-#### sublime tab cycle order
+#### sublime tab cycle order 'recently viewed' -> 'display order'
 
-1. open sublime text,
+1. open sublime text
 2. `CTRL-SHIFT-P` to open palette
 3. go to `Preferences: Key Bindings`
 4. Add the following to the user preferences tab (to the right of the new window):
