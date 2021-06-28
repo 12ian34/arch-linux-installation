@@ -293,7 +293,7 @@ mkinitcpio -p linux
 
 ##### packages
 ```
-sudo pacman -Syu acpi adobe-source-han-sans-cn-fonts adobe-source-han-sans-hk-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts alsa-lib alsa-plugins alsa-utils amd-ucode android-tools arandr asciiquarium autoconf automake bash binutils cmatrix code coreutils device-mapper diffutils dmidecode e2fsprogs fakeroot feh file filesystem findutils firefox fish fuse fuse2 fwupd fzf gawk gcc gcc-libs github-cli gnome-keyring gparted grep gvfs gzip htop i3 i3-wm i3status-rust imagemagick inetutils iotop iproute2 iputils less lib32-libva-mesa-driver lib32-mesa-vdpau lib32-vulkan-radeon libreoffice-fresh libtool libva-mesa-driver licenses lm_sensors logrotate lsd lvm2 lxappearance make mesa mesa-vdpau mpv neofetch net-tools nitrogen ntfs-3g numlockx openssh opera opera-ffmpeg-codecs otf-ipafont pacman pacman-contrib pciutils pcmanfm pulseaudio pulseaudio-alsa python python-virtualenv qalculate-gtk radeontop rclone redshift reiserfsprogs rofi scrot seahorse sed sshfs syncthing systemd systemd-swap systemd-sysvcompat telegram-desktop terminus-font thunderbird tmux transmission-gtk tree ttf-dejavu ttf-droid ttf-font-awesome ttf-hanazono ttf-ibm-plex ttf-inconsolata ttf-joypixels ttf-liberation ttf-roboto ttf-roboto-mono ttf-ubuntu-font-family ufw unzip usbutils util-linux vdpauinfo vivaldi vlc vulkan-radeon wget which whois xdg-user-dirs xf86-video-amdgpu xfce4-terminal xorg xorg-apps xorg-xset zip
+sudo pacman -Syu acpi adobe-source-han-sans-cn-fonts adobe-source-han-sans-hk-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts alsa-lib alsa-plugins alsa-utils amd-ucode android-tools arandr asciiquarium autoconf automake bash binutils cmatrix code coreutils device-mapper diffutils dmidecode e2fsprogs fakeroot feh file filesystem findutils firefox fish fuse fuse2 fwupd fzf gawk gcc gcc-libs github-cli gnome-keyring gparted grep gvfs gzip htop i3 i3-wm i3status-rust imagemagick inetutils iotop iproute2 iputils less lib32-libva-mesa-driver lib32-mesa-vdpau lib32-vulkan-radeon libreoffice-fresh libtool libva-mesa-driver licenses lm_sensors logrotate lsd lvm2 lxappearance make mesa mesa-vdpau mpv neofetch net-tools nitrogen ntfs-3g numlockx openssh opera opera-ffmpeg-codecs otf-ipafont pacman pacman-contrib pciutils pcmanfm pulseaudio pulseaudio-alsa python python-virtualenv qalculate-gtk radeontop rclone redshift reiserfsprogs rofi scrot seahorse sed sshfs syncthing systemd systemd-swap systemd-sysvcompat telegram-desktop terminus-font thunderbird tmux transmission-gtk tree ttf-dejavu ttf-droid ttf-font-awesome ttf-hanazono ttf-ibm-plex ttf-inconsolata ttf-joypixels ttf-liberation ttf-roboto ttf-roboto-mono ttf-ubuntu-font-family ufw unzip usbutils util-linux vdpauinfo vivaldi vlc vulkan-radeon wget which whois xdg-user-dirs xf86-video-amdgpu xfce4-terminal xfce4-settings xorg xorg-apps xorg-xset zip
 ```
 
 ##### wifi
@@ -445,13 +445,37 @@ set -Ux LIBVA_DRIVER_NAME radeonsi
 #### sublime tab cycle order 'recently viewed' -> 'display order'
 
 1. open sublime text
-2. `CTRL-SHIFT-P` to open palette
-3. go to `Preferences: Key Bindings`
-4. Add the following to the user preferences tab (to the right of the new window):
+1. `CTRL-SHIFT-P` to open palette
+1. go to `Preferences: Key Bindings`
+1. Add the following to the user preferences tab (to the right of the new window):
     ```
     { "keys": ["ctrl+tab"], "command": "next_view" },
     { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
     ```
+#### enable and start syncthing
+
+```
+systemctl enable syncthing --user
+systemctl start syncthing --user
+```
+
+#### create directories
+```
+mkdir -p ~/downloads/torrent/incomplete
+mkdir ~/downloads/slack
+mkdir ~/downloads/firefox
+mkdir ~/downloads/vivaldi
+mkdir ~/downloads/chromium
+mkdir ~/dev
+mkdir ~/pics
+mkdir ~/sync
+```
+
+#### lights off
+1. run `lxappearance`
+1. change theme to `Adwaita-dark`
+1. change default font to `Roboto Mono` `Regular` `11`
+1. change icon theme to `Archdroid-Grey`
 
 # sources:
 - https://wiki.archlinux.org/index.php/Installation_guide
