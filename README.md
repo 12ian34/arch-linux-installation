@@ -21,6 +21,49 @@
 
 # installation process
 
+##### backup current config to private `dotfiles` repo
+
+```
+mkdir -p ~/dotfiles/home/usr/share/
+cp -r /usr/share/applications/ ~/dotfiles/home/usr/share/
+# cp /usr/share/X11/xorg.conf.d/10-amdgpu.conf ~/dotfiles/home/
+cp /etc/X11/xorg.conf.d/20-amdgpu.conf ~/dotfiles/home/
+cp /etc/X11/xorg.conf.d/10-monitor.conf ~/dotfiles/home/
+
+mkdir -p ~/dotfiles/home/joplin-desktop
+cp joplin-desktop/settings.json ~/dotfiles/home/joplin-desktop/
+
+cp ~/.local/share/fish/fish_history ~/dotfiles/home/
+cp ~/.xinitrc ~/dotfiles/home/dotxinitrc
+cp ~/.gtk-bookmarks ~/dotfiles/home/dotgtk-bookmarks
+cp ~/.Xresources ~/dotfiles/home/dotXresources
+cp -r ~/.screenlayout/ ~/dotfiles/home/dotscreenlayout
+
+sudo cp /etc/hosts ~/dotfiles/home/
+sudo cp /boot/loader/entries/arch.conf ~/dotfiles/home/
+cp /etc/asound.conf ~/dotfiles/home/
+cp /etc/vconsole.conf ~/dotfiles/home/
+cp /etc/mkinitcpio.conf ~/dotfiles/home/
+cp /etc/pacman.conf ~/dotfiles/home/
+
+cp -r ~/.config/i3/ ~/dotfiles/home/
+cp -r ~/.config/i3status-rust/ ~/dotfiles/home/
+cp -r ~/.config/xfce4/ ~/dotfiles/home/
+cp -r ~/.config/fish/ ~/dotfiles/home/
+cp -r ~/.config/fisher/ ~/dotfiles/home/
+cp -r ~/.config/nano/ ~/dotfiles/home/
+cp -r ~/.config/htop/ ~/dotfiles/home/
+cp -r ~/.config/picom/ ~/dotfiles/home/
+cp -r ~/.config/pcmanfm/ ~/dotfiles/home/
+cp -r ~/.config/ckb-next/ ~/dotfiles/home/
+cp -r ~/.config/rofi/ ~/dotfiles/home/
+cp ~/.config/redshift.conf ~/dotfiles/home/
+
+pacman -Qqem > ~/dotfiles/home/pacman-Qqem.txt
+pacman -Qqen > ~/dotfiles/home/pacman-Qqen.txt
+```
+
+
 ##### secure boot
 Disable `secure boot` on the laptop to be upgraded to Arch.
 
@@ -137,7 +180,6 @@ tzselect
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 hwclock --systohc --utc
 echo 'KEYMAP=uk' > /etc/vconsole.conf
-# echo 'FONT=latarcyrheb-sun32' >> /etc/vconsole.conf
 echo 'archhostname' > /etc/hostname
 echo '127.0.1.1 archhostname.localdomain archhostname' >> /etc/hosts
 hostnamectl set-hostname archhostname
@@ -149,7 +191,6 @@ passwd
 useradd -m -g users -G wheel,storage,power -s /bin/bash ian
 passwd ian
 echo 'ian ALL=(ALL) ALL' > /etc/sudoers.d/ian
-users
 ```
 
 ##### initramfs
@@ -157,7 +198,8 @@ users
 nano /etc/mkinitcpio.conf
 ```
 - `modules`:
-  - add `i915 ext4 nvme intel_agp`
+  - for intel, add `i915 ext4 nvme intel_agp`
+  - for amd, add `amdgpu ext4 nvme`
 - `hooks`:
   - change line to `base systemd autodetect keyboard sd-vconsole block modconf sd-encrypt sd-lvm2 filesystems fsck`
 
@@ -225,36 +267,36 @@ mkinitcpio -p linux
 exit
 umount -R /mnt
 reboot
+```
+##### wifi 
+```
 wifi-menu -o wlp58s0
 ip link set wlp58s0 down
 netctl start <wifi-ssid-name>
 echo 'ForceConnect=yes' >> /etc/netctl/<wifi-ssid-name>
-```
-```
-#pacman -S intel-ucode
-#nano /boot/loader/entries/arch.conf
-#enter:
-  #initrd	/intel-ucode.img
-```
-```
-mkinitcpio -p linux
 systemctl stop netctl@<wifi-ssid-name>
 systemctl disable netctl@<wifi-ssid-name>
 systemctl stop dhcpcd
 systemctl disable dhcpcd
 ```
+##### for intel
+```
+pacman -S intel-ucode
+nano /boot/loader/entries/arch.conf
+```
+enter:
+`initrd	/intel-ucode.img`
+
+```
+mkinitcpio -p linux
+```
 
 ##### packages
-```
-nano /etc/pacman.conf
-```
-- uncomment "Color"
-
 ```
 sudo pacman -Syu acpi adobe-source-han-sans-cn-fonts adobe-source-han-sans-hk-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts alsa-lib alsa-plugins alsa-utils amd-ucode android-tools arandr asciiquarium autoconf automake bash binutils cmatrix code coreutils device-mapper diffutils dmidecode e2fsprogs fakeroot feh file filesystem findutils firefox fish fuse fuse2 fwupd fzf gawk gcc gcc-libs github-cli gnome-keyring gparted grep gvfs gzip htop i3 i3-wm i3status-rust imagemagick inetutils iotop iproute2 iputils less lib32-libva-mesa-driver lib32-mesa-vdpau lib32-vulkan-radeon libreoffice-fresh libtool libva-mesa-driver licenses lm_sensors logrotate lsd lvm2 lxappearance make mesa mesa-vdpau mpv neofetch net-tools nitrogen ntfs-3g numlockx openssh opera opera-ffmpeg-codecs otf-ipafont pacman pacman-contrib pciutils pcmanfm pulseaudio pulseaudio-alsa python python-virtualenv qalculate-gtk radeontop rclone redshift reiserfsprogs rofi scrot seahorse sed sshfs syncthing systemd systemd-swap systemd-sysvcompat telegram-desktop terminus-font thunderbird tmux transmission-gtk tree ttf-dejavu ttf-droid ttf-font-awesome ttf-hanazono ttf-ibm-plex ttf-inconsolata ttf-joypixels ttf-liberation ttf-roboto ttf-roboto-mono ttf-ubuntu-font-family ufw unzip usbutils util-linux vdpauinfo vivaldi vlc vulkan-radeon wget which whois xdg-user-dirs xf86-video-amdgpu xfce4-terminal xorg xorg-apps xorg-xset zip
 ```
 
-##### internet
+##### wifi
 ```
 systemctl start NetworkManager
 systemctl enable NetworkManager
@@ -268,36 +310,40 @@ cd yay
 makepkg -si
 ```
 
-##### install a bunch of other packages
+##### install AUR packages
 ```
 yay -Syu aur/adwaita-dark aur/archdroid-icon-theme aur/chromium-widevine aur/awesome-terminal-fonts-patched aur/birdtray aur/dislocker aur/exodus aur/google-cloud-sdk aur/joplin-desktop aur/msi-rgb aur/nerd-fonts-roboto-mono aur/protonmail-bridge aur/slack aur/spotify aur/steam-fonts aur/ttf-ms-fonts aur/vivaldi-widevine aur/whatsapp-nativefier aur/ttf-roboto-slab aur/ttf-twemoji aur/ttf-symbola
 ```
 
-##### sublime text
+##### add sublime text repo and install
 
 ```
 curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
-
 echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
-
 sudo pacman -Syu sublime-text
 ```
 
-##### final steps
+##### enable swap
 ```
-sudo lspci -s 00:02 -vk
 sudo systemctl enable systemd-swap
-cp /etc/X11/xinit/xinitrc ~/.xinitrc
-nano .xinitrc
 ```
-- remove shit at bottom
-- enter: 
+
+##### set up git and clone private repos
+
 ```
-setxkbmap -layout gb &
-numlockx &
-xset r rate 200 30 &
-exec i3
+gh auth login
+git config --global user.email "<email>"
+git config --global user.name "<name>"
+gh repo clone 12ian34/scripts
+gh repo clone 12ian34/dotfiles
 ```
+
+##### update xinitrc
+```
+cp -r ~/dotfiles/home/dotxinitrc ~/.xinitrc
+```
+
+##### start x on login
 ```
 sudo nano /etc/profile
 ```
