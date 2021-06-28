@@ -310,6 +310,27 @@ fi
 ```
 reboot
 ```
+#### firefox flags (settings and hardware acceleration)
+go to `about:config`
+
+change the following preferences:
+
+| parameter | set to value |
+| --- | --- |
+| browser.tabs.loadBookmarksInBackground | true |
+| media.hardwaremediakeys.enabled | false |
+| mousewheel.with_control.action | 1 |
+| network.dns.disablePrefetch | true |
+| network.http.speculative-parallel-limit | 0 |
+| network.prefetch-next | false |
+| gfx.webrender.all | true |
+| media.ffmpeg.vaapi.enabled | true |
+| media.ffvpx.enabled | false |
+| media.rdd-vpx.enabled | false |
+| security.sandbox.content.level | 0 |
+| media.navigator.mediadatadecoder_vpx_enabled | true |
+| gfx.x11-egl.force-enabled | true |
+| gfx.x11-egl.force-disabled | false |
 
 # sources:
 - https://wiki.archlinux.org/index.php/Installation_guide
