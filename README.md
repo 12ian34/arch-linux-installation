@@ -501,6 +501,13 @@ sudo zerotier-cli listpeers
 - YAML
 - Markdown Preview Enhanced
 
+#### copy Thunderbird profile
+
+mount drive containing old profile folder, navigate to its location, then copy to local
+```
+cp -r .thunderbird ~/
+```
+
 #### lights off
 1. run `lxappearance`
 1. change theme to `Adwaita-dark`
