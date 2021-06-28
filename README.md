@@ -214,7 +214,7 @@ default arch
 timeout 0
 editor 0
 ```
-
+get drive UUID for boot loader conf
 ```
 blkid -s UUID -o value /dev/nvme0n1p2
 cryptsetup luksUUID /dev/nvme0n1p2
