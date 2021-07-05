@@ -541,8 +541,7 @@ sudo zerotier-cli listpeers
         "key": "ctrl+shift+tab",
         "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
         "when": "inEditorsPicker && inQuickOpen"
-    }
-]
+    }]
 ```
 
 #### copy Thunderbird profile
