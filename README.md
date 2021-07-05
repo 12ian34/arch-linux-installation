@@ -507,8 +507,7 @@ sudo zerotier-cli listpeers
 2. Go to `Preferences: Open Keyboard Shortcuts`
 3. Paste :
     ```
-    [
-    {
+    [{
         "key": "ctrl+tab",
         "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
     },
@@ -542,7 +541,7 @@ sudo zerotier-cli listpeers
         "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
         "when": "inEditorsPicker && inQuickOpen"
     }]
-```
+    ```
 
 #### copy Thunderbird profile
 
