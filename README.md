@@ -586,6 +586,7 @@ cp -r .thunderbird ~/
         - table_beautifier
         - zenmode
             - add url: https://cdn.spacetelescope.org/archives/images/screen/heic0611b.jpg
+            - untick "Use builtin backgrounds...", "Hide the header..." and "Hide the menubar..."
         - Hinterland
         - Toggle all line numbers
         - Autopep8
