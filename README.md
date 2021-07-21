@@ -556,6 +556,40 @@ cp -r .thunderbird ~/
 1. change default font to `Roboto Mono` `Regular` `11`
 1. change icon theme to `Archdroid-Grey`
 
+#### create python virtual environment and get some basic stuff
+1. `mkdir ~/.venvs/`
+1. `python -m venv ~/.venvs/venv_general
+1. `pip install --upgrade pip`
+1. `pip install wheel`
+1. `pip install pandas numpy lxml jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator`
+1. `jupyter notebook --generate-config`
+2. `jupyter notebook password`
+
+#### Jupyter Notebook extensions and configurator
+1. `jupyter contrib nbextension install --user`
+1. `jupyter nbextensions_configurator enable --user`
+1. Configure extensions:
+    1. Go to the [configurator](http://localhost:8888/tree#nbextensions_configurator)
+    2. untick "disable configuration for..."
+    3. Enable:
+        - AutoSaveTime
+        - Code prettify
+        - Collapsible Headings
+        - Highlight selected word
+        - Notify
+        - Variable Inspector
+        - Codefolding
+        - ExecuteTime
+        - Live Markdown Preview
+        - table_beautifier
+        - zenmode
+            - add url: https://cdn.spacetelescope.org/archives/images/screen/heic0611b.jpg
+        - Hinterland
+        - Toggle all line numbers
+        - Autopep8
+        - Move selected cells
+        - Rubberband
+
 # sources:
 - https://wiki.archlinux.org/index.php/Installation_guide
 - https://linuxconfig.org/install-arch-linux-on-thinkpad-x1-carbon-gen-7-with-encrypted-filesystem-and-uefi
