@@ -558,14 +558,16 @@ cp -r .thunderbird ~/
 
 #### create python virtual environment and get some basic stuff
 1. `mkdir ~/.venvs/`
-1. `python -m venv ~/.venvs/venv_general
+1. `python -m venv ~/.venvs/venv_general`
+1. `source ~/.venvs/venv_general/bin/activate.fish`
 1. `pip install --upgrade pip`
 1. `pip install wheel`
 1. `pip install pandas numpy lxml jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator`
 1. `jupyter notebook --generate-config`
-2. `jupyter notebook password`
+1. `jupyter notebook password`
 
 #### Jupyter Notebook extensions and configurator
+1. `source ~/.venvs/venv_general/bin/activate.fish`
 1. `jupyter contrib nbextension install --user`
 1. `jupyter nbextensions_configurator enable --user`
 1. Configure extensions:
