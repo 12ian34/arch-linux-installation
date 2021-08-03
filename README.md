@@ -491,6 +491,16 @@ sudo zerotier-cli listnetworks
 sudo zerotier-cli listpeers
 ```
 
+#### insults on wrong sudo password
+
+```
+sudo nano /etc/sudoers
+```
+add to new line:
+```
+Defaults insults
+```
+
 #### VS Code extensions
 - Python
 - Bracket Pair Colorizer 2
