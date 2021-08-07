@@ -119,6 +119,7 @@ timedatectl set-ntp true
 lsblk
 cgdisk /dev/nvme0n1
 ```
+- delete all existing partitions
 - first partition:
   - allocation: `512M`
   - type: `ef00`
