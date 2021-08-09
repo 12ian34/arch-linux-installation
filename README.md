@@ -315,7 +315,7 @@ makepkg -si
 
 ##### install AUR packages
 ```
-yay -Syu aur/adwaita-dark aur/archdroid-icon-theme aur/chromium-widevine aur/awesome-terminal-fonts-patched aur/birdtray aur/dislocker aur/exodus aur/google-cloud-sdk aur/joplin-desktop aur/msi-rgb aur/nerd-fonts-roboto-mono aur/protonmail-bridge aur/slack-desktop aur/spotify aur/steam-fonts aur/ttf-ms-fonts aur/vivaldi-widevine aur/whatsapp-nativefier aur/ttf-roboto-slab aur/ttf-twemoji aur/ttf-symbola aur/code-marketplace
+yay -Syu aur/adwaita-dark aur/archdroid-icon-theme aur/chromium-widevine aur/awesome-terminal-fonts-patched aur/birdtray aur/dislocker aur/exodus aur/google-cloud-sdk aur/joplin-desktop aur/msi-rgb aur/nerd-fonts-roboto-mono aur/protonmail-bridge aur/slack-desktop aur/spotify aur/steam-fonts aur/ttf-ms-fonts aur/vivaldi-widevine aur/whatsapp-nativefier aur/ttf-roboto-slab aur/ttf-twemoji aur/ttf-symbola aur/code-marketplace aur/zsa-wally
 ```
 
 ##### add sublime text repo and install
@@ -502,57 +502,11 @@ add to new line:
 Defaults insults
 ```
 
-#### VS Code extensions
-- Python
-- Bracket Pair Colorizer 2
-- HTML snippets
-- GitLens
-- Prettier - Code formatter
-- Material Icon Theme
-- YAML
-- Markdown Preview Enhanced
+#### VS Code setup:
 
-#### VS Code keyboard shortcuts
-
-1. Open command palette
-2. Go to `Preferences: Open Keyboard Shortcuts`
-3. Paste :
-    ```
-    [{
-        "key": "ctrl+tab",
-        "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
-    },
-    {
-        "key": "ctrl+tab",
-        "command": "-workbench.action.quickOpenNavigateNextInEditorPicker",
-        "when": "inEditorsPicker && inQuickOpen"
-    },
-    {
-        "key": "ctrl+tab",
-        "command": "workbench.action.nextEditor"
-    },
-    {
-        "key": "ctrl+pagedown",
-        "command": "-workbench.action.nextEditor"
-    },
-    {
-        "key": "ctrl+shift+tab",
-        "command": "workbench.action.previousEditor"
-    },
-    {
-        "key": "ctrl+pageup",
-        "command": "-workbench.action.previousEditor"
-    },
-    {
-        "key": "ctrl+shift+tab",
-        "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
-    },
-    {
-        "key": "ctrl+shift+tab",
-        "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
-        "when": "inEditorsPicker && inQuickOpen"
-    }]
-    ```
+1. Install Settings Sync
+2. Login with github
+3. Download settings from private gist
 
 #### copy Thunderbird profile
 
