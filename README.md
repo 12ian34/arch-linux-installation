@@ -100,11 +100,17 @@ ls /sys/firmware/efi/efivars
 ```
 
 ##### internet
+get wifi interface name
 ```
-iw dev
-wifi-menu -o wlp58s0
-systemctl stop dhcpcd
-systemctl start dhcpcd
+ip link
+```
+scan and connect
+```
+iwctl
+station wlan0 scan
+station wlan0 get-networks
+station wlan0 connect <SSID>
+exit
 ```
 
 ##### date
@@ -128,6 +134,7 @@ cgdisk /dev/nvme0n1
   - allocation: (to suggested max)
   - type: `8300`
   - name: `main`
+- then select `write`
 ```
 mkfs.vfat -F32 /dev/nvme0n1p1
 mkfs.ext4 /dev/nvme0n1p2
@@ -166,7 +173,7 @@ nano /etc/pacman.d/mirrorlist
   `Server = https://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch`
 
 ```
-pacstrap /mnt base base-devel cryptsetup dhcpcd dialog efibootmgr intel-ucode iw linux linux-headers lvm2 man-db man-pages nano sudo texinfo vim wpa_supplicant wifi-menu vulkan-intel xf86-video-intel linux-firmware xf86-video-vesa
+pacstrap /mnt base base-devel cryptsetup dhcpcd dialog efibootmgr intel-ucode iw linux linux-headers lvm2 man-db man-pages nano sudo texinfo vim vulkan-intel xf86-video-intel linux-firmware xf86-video-vesa
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
 `nano /mnt/etc/fstab`
