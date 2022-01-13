@@ -446,6 +446,7 @@ change the following preferences:
 | media.navigator.mediadatadecoder_vpx_enabled | true |
 | gfx.x11-egl.force-enabled | true |
 | gfx.x11-egl.force-disabled | false |
+| network.http.http3.enabled | false |
 
 using fish, set universal permanent environment variables:
 ```
